@@ -2,7 +2,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-public class gameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public Character character;
     public Monster monster;
@@ -26,9 +26,9 @@ public class gameManager : MonoBehaviour
     }
 
     #region Singleton
-    private static gameManager _instance;
+    private static GameManager _instance;
 
-    public static gameManager instance
+    public static GameManager instance
     {
         get
         {
@@ -46,5 +46,10 @@ public class gameManager : MonoBehaviour
         Debug.Log("TestSingleton 호출됨!");
     }
 
+    public void CrashCharacterToMonster()
+    {
+        character.PlayAnimation(Character.PlayerState.attack);
+        monster.SetMonsterSpeed(0f);
+    }
 
 }

@@ -13,17 +13,14 @@ public class Monster : MonoBehaviour
         transform.Translate(new Vector3(-1 * Time.deltaTime * speed, 0, 0));
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.tag == "player")
-        {
-            speed = 0f;
-        }
-    }
-
     public void TestSingletonMonster()
     {
         Debug.Log("몬스터 연결 확인 완료!");
+    }
+
+    public void SetMonsterSpeed(float setSpeed)
+    {
+        speed = setSpeed;
     }
 
 }
