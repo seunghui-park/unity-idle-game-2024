@@ -19,11 +19,11 @@ public class moveBackground : MonoBehaviour
         for (int i = 0; i < backgroundSprite.Length; i++)
         {
             backgroundOffset[i] -= Time.deltaTime * scrollSpeed;
-            backgroundSprite[i].transform.localPosition = new Vector3(backgroundOffset[i], 0);
+            backgroundSprite[i].transform.localPosition = new Vector3(backgroundOffset[i], 320);
 
             if (backgroundSprite[i].transform.localPosition.x <= -720)
             {
-                backgroundSprite[i].transform.localPosition = new Vector3(1440, 0);
+                backgroundSprite[i].transform.localPosition = new Vector3(1440, 320);
                 backgroundOffset[i] = 1440;
             }
         }
