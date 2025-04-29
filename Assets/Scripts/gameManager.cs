@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public Character character;
     public Monster monster;
+    public moveBackground backgroundScroll;
 
     void Start()
     {
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
     {
         character.PlayAnimation(Character.PlayerState.attack);
         monster.SetMonsterSpeed(0f);
+        backgroundScroll.stopBackground();
     }
 
 }
