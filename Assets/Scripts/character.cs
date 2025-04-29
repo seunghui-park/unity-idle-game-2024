@@ -15,8 +15,15 @@ public class Character : MonoBehaviour
         if (other.tag == "enemy")
         {
             GameManager.instance.CrashCharacterToMonster();
+            GameManager.instance.AddAttackCount();
         }
     }
+
+    public void OnAttackAnimationEnd()
+    {
+        GameManager.instance.AddAttackCount();
+    }
+
 
     public void TestSingletonCharacter()
     {

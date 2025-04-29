@@ -30,4 +30,5 @@ public class moveBackground : MonoBehaviour
     }
 
     public void stopBackground() => scrollSpeed = 0f;
+    public void resumeBackground() => scrollSpeed = 700f;
 }

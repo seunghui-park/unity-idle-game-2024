@@ -872,6 +872,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 1195067148}
   monster: {fileID: 746224402}
+  backgroundScroll: {fileID: 925080527}
+  attackCount: 0
 --- !u!1 &925080526
 GameObject:
   m_ObjectHideFlags: 0
