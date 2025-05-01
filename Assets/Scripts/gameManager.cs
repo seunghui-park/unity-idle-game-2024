@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.TextCore.Text;
 
 public class GameManager : MonoBehaviour
@@ -57,10 +59,10 @@ public class GameManager : MonoBehaviour
 
     private void ResumeAfterAttack()
     {
-        character.PlayAnimation(Character.PlayerState.run); // 캐릭터 다시 달리기
-        monster.SetMonsterSpeed(0.5f); // 몬스터 이동 재개
-        backgroundScroll.resumeBackground(); // 배경 스크롤 재개
-        attackCount = 0; // 공격 카운트 초기화
+        character.PlayAnimation(Character.PlayerState.run);
+        monster.SetMonsterSpeed(0.5f);
+        backgroundScroll.resumeBackground();
+        attackCount = 0;
     }
 
     public void AddAttackCount()
@@ -73,5 +75,4 @@ public class GameManager : MonoBehaviour
             ResumeAfterAttack();
         }
     }
-
 }
