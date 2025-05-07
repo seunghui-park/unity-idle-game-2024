@@ -3,6 +3,8 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public Animator anim;
+    private bool isAttacking = false;
+
     public enum PlayerState
     {
         none,
@@ -14,6 +16,7 @@ public class Character : MonoBehaviour
     {
         if (other.tag == "enemy")
         {
+            Debug.Log("충돌 감지됨!");
             GameManager.instance.CrashCharacterToMonster();
             GameManager.instance.AddAttackCount();
         }
@@ -21,13 +24,13 @@ public class Character : MonoBehaviour
 
     public void OnAttackAnimationEnd()
     {
-        GameManager.instance.AddAttackCount();
-    }
-
-
-    public void TestSingletonCharacter()
-    {
-        Debug.Log("캐릭터 연결 확인 완료!");
+        isAttacking = false;
+        if (GameManager.instance.monster.isDead)
+        {
+            PlayAnimation(PlayerState.run);
+            return;
+        }
+        GameManager.instance.monster.TakeDamage(25);
     }
 
     public void PlayAnimation(PlayerState state)
@@ -35,9 +38,14 @@ public class Character : MonoBehaviour
         switch (state)
         {
             case PlayerState.attack:
-                anim.Play("character_attack");
+                if (!isAttacking)
+                {
+                    isAttacking = true;
+                    anim.Play("character_attack");
+                }
                 break;
             case PlayerState.run:
+                isAttacking = false;
                 anim.Play("character_run");
                 break;
         }

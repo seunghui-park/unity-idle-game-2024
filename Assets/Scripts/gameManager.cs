@@ -3,6 +3,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.TextCore.Text;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,12 +11,6 @@ public class GameManager : MonoBehaviour
     public Monster monster;
     public moveBackground backgroundScroll;
     public int attackCount = 0;
-
-    void Start()
-    {
-        character.TestSingletonCharacter();
-        monster.TestSingletonMonster();
-    }
 
     void Awake()
     {
@@ -52,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     public void CrashCharacterToMonster()
     {
+        Debug.Log("CrashCharacterToMonster 실행됨");
         character.PlayAnimation(Character.PlayerState.attack);
         monster.SetMonsterSpeed(0f);
         backgroundScroll.stopBackground();
@@ -60,8 +56,10 @@ public class GameManager : MonoBehaviour
     private void ResumeAfterAttack()
     {
         character.PlayAnimation(Character.PlayerState.run);
-        monster.SetMonsterSpeed(0.5f);
+
         backgroundScroll.resumeBackground();
+
+        StartCoroutine(RespawnMonsterCoroutine());
         attackCount = 0;
     }
 
@@ -75,4 +73,17 @@ public class GameManager : MonoBehaviour
             ResumeAfterAttack();
         }
     }
+
+    public void MonsterDefeated()
+    {
+        ResumeAfterAttack();
+        StartCoroutine(RespawnMonsterCoroutine());
+    }
+
+    private IEnumerator RespawnMonsterCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        monster.Respawn(new Vector3(429,73,0));
+    }
+
 }
